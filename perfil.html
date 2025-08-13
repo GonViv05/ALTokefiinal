@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <title>Mis Pedidos | ALToke</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+</head>
+<body>
+       <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html">Proveedores</a></li>
+                    <li><a href="/contactos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="orders-page">
+        <div class="container">
+            <h1 class="section-title">Mis Pedidos</h1>
+            
+            <div class="orders-filter">
+                <button class="filter-btn active" data-status="all">Todos</button>
+                <button class="filter-btn" data-status="pending">Pendientes</button>
+                <button class="filter-btn" data-status="processing">En Proceso</button>
+                <button class="filter-btn" data-status="cancelled">Cancelados</button>
+            </div>
+            
+            <div class="orders-list" id="ordersList">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Cargando pedidos...</div>
+            </div>
+            
+            <div class="pagination">
+                <button class="btn btn-outline" id="prevPage"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <div class="page-numbers" id="pageNumbers"></div>
+                <button class="btn btn-outline" id="nextPage">Siguiente <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <script src="/javita/main.js"></script>
+    <script src="/javita/auth.js"></script>
+    <script src="/javita/carrito.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Auth.updateAuthUI();
+            Carrito.actualizarContador();
+            document.getElementById('logoutBtn')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+
+            let allOrders = [];
+            let currentFilter = 'all';
+
+            // Wire filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentFilter = btn.getAttribute('data-status');
+                    applyFilter();
+                });
+            });
+
+            // Cargar pedidos
+            loadOrders();
+
+            async function loadOrders() {
+                try {
+                    document.getElementById('ordersList').innerHTML = `
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Cargando pedidos...</div>
+                    `;
+                    const response = await Auth.fetchWithAuth('http://localhost:5003/pedidos');
+                    const data = await response.json();
+                    if(data.success) {
+                        allOrders = data.orders || [];
+                        applyFilter(); // render respecting current filter
+                        document.querySelector('.pagination').style.display = 'none';
+                    } else {
+                        throw new Error(data.message || 'Error al cargar pedidos');
+                    }
+                } catch (error) {
+                    document.getElementById('ordersList').innerHTML = `
+                        <div class="error-state">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>${error.message || 'Error al cargar los pedidos'}</p>
+                            <button class="btn btn-primary" id="retryOrders">Reintentar</button>
+                        </div>
+                    `;
+                    document.getElementById('retryOrders').addEventListener('click', () => loadOrders());
+                }
+            }
+
+            function applyFilter() {
+                // toggle active class
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.toggle('active', b.getAttribute('data-status') === currentFilter);
+                });
+                const filtered = currentFilter === 'all'
+                    ? allOrders
+                    : allOrders.filter(o => (o.status || '').toLowerCase() === currentFilter);
+                renderOrders(filtered);
+            }
+
+            function renderOrders(orders) {
+                const container = document.getElementById('ordersList');
+                if(!orders.length) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <h3>No tienes pedidos</h3>
+                            <p>Cuando realices un pedido, aparecerá aquí</p>
+                            <a href="/productos.html" class="btn btn-primary">Ver Productos</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                orders.forEach(order => {
+                    const total = order.total ?? order.subtotal ?? 0;
+                    const statusClass = getStatusClass(order.status);
+                    html += `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-info">
+                                    <h3>Pedido #${order.id}</h3>
+                                    <span class="order-date">${formatDate(order.date)}</span>
+                                </div>
+                                <div class="order-status ${statusClass}">
+                                    ${getStatusText(order.status)}
+                                </div>
+                            </div>
+                            <div class="order-details">
+                                <div class="order-items">
+                                    ${(order.items || []).slice(0, 3).map(item => `
+                                        <div class="order-item">
+                                            <div class="item-image">
+                                                <img src="${item.imagen || '/estilos/imagenes/placeholder-producto.jpg'}" alt="${item.nombre}">
+                                                <span class="item-quantity">${item.cantidad}x</span>
+                                            </div>
+                                            <div class="item-info">
+                                                <h4>${item.nombre}</h4>
+                                                <p>${item.proveedor || ''}</p>
+                                                <span class="item-price">₲ ${(item.precio || 0).toLocaleString()}</span>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                    ${(order.items || []).length > 3 ? `<div class="more-items">+${(order.items.length - 3)} más</div>` : ''}
+                                </div>
+                                <div class="order-summary">
+                                    <div class="summary-row"><span>Subtotal:</span><span>₲ ${(order.subtotal || 0).toLocaleString()}</span></div>
+                                    <div class="summary-row"><span>Envío:</span><span>₲ ${(order.shipping_cost || 0).toLocaleString()}</span></div>
+                                    <div class="summary-row"><span>Descuento:</span><span>-₲ ${(order.discount || 0).toLocaleString()}</span></div>
+                                    <div class="summary-row total"><span>Total:</span><span>₲ ${total.toLocaleString()}</span></div>
+                                </div>
+                            </div>
+                                ${order.status === 'pending' || order.status === 'processing' ? `
+                                    <button class="btn btn-outline cancel-order" data-id="${order.id}">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </button>
+                                ` : ''}
+                                <button class="btn btn-outline reorder" data-id="${order.id}">
+                                    <i class="fas fa-redo"></i> Volver a Pedir
+                                </button>
+                                ${order.status === 'cancelled' ? `
+                                    <button class="btn btn-danger delete-order" data-id="${order.id}">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+
+                document.querySelectorAll('.cancel-order').forEach(btn => {
+                    btn.addEventListener('click', () => cancelOrder(btn.getAttribute('data-id')));
+                });
+                document.querySelectorAll('.reorder').forEach(btn => {
+                    btn.addEventListener('click', () => reorder(btn.getAttribute('data-id')));
+                });
+                document.querySelectorAll('.delete-order').forEach(btn => {
+                    btn.addEventListener('click', () => deleteOrder(btn.getAttribute('data-id')));
+                });
+            }
+
+            function getStatusClass(status) {
+                switch(status) {
+                    case 'pending': return 'status-pending';
+                    case 'processing': return 'status-processing';
+                    case 'shipped': return 'status-shipped';
+                    case 'delivered': return 'status-delivered';
+                    case 'cancelled': return 'status-cancelled';
+                    default: return '';
+                }
+            }
+            function getStatusText(status) {
+                switch(status) {
+                    case 'pending': return 'Pendiente';
+                    case 'processing': return 'En Proceso';
+                    case 'shipped': return 'Enviado';
+                    case 'delivered': return 'Entregado';
+                    case 'cancelled': return 'Cancelado';
+                    default: return status || '';
+                }
+            }
+            function formatDate(dateString) {
+                try { return new Date(dateString).toLocaleDateString('es-PY', { year: 'numeric', month: 'long', day: 'numeric' }); }
+                catch { return ''; }
+            }
+
+            async function cancelOrder(orderId) {
+                if(!confirm('¿Estás seguro de que deseas cancelar este pedido?')) return;
+                try {
+                    const response = await Auth.fetchWithAuth(`http://localhost:5003/pedidos/${orderId}`, { method: 'DELETE' });
+                    const data = await response.json();
+                    if(data.success) {
+                        showToast('Pedido cancelado', 'success');
+                        loadOrders(); // re-aplica filtro
+                    } else {
+                        throw new Error(data.message || 'Error al cancelar pedido');
+                    }
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+
+            async function reorder(orderId) {
+                try {
+                    const response = await Auth.fetchWithAuth(`http://localhost:5003/pedidos/${orderId}/reorden`, { method: 'POST' });
+                    const data = await response.json();
+                    if(data.success) {
+                        showToast('Productos añadidos al carrito', 'success');
+                        Carrito.actualizarContador();
+                        window.location.href = '/carrito.html';
+                    } else {
+                        throw new Error(data.message || 'Error al volver a pedir');
+                    }
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+
+            async function deleteOrder(orderId) {
+                if(!confirm('¿Eliminar definitivamente este pedido? Esta acción no se puede deshacer.')) return;
+                try {
+                    const response = await Auth.fetchWithAuth(`http://localhost:5003/pedidos/${orderId}?hard=true`, { method: 'DELETE' });
+                    const data = await response.json();
+                    if(data.success) {
+                        showToast('Pedido eliminado', 'success');
+                        loadOrders(); // re-aplica filtro
+                    } else {
+                        throw new Error(data.message || 'Error al eliminar pedido');
+                    }
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            }
+
+            function showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `toast-notification ${type}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.classList.add('show'), 100);
+                setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

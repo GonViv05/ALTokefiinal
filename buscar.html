@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <title>Buscar Productos | ALToke</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+</head>
+<body>
+        <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html">Proveedores</a></li>
+                    <li><a href="/contactos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="search-page">
+        <div class="container">
+            <div class="search-header">
+                <h1>Resultados de búsqueda</h1>
+                <p class="search-query">Mostrando resultados para: <span id="searchTerm"></span></p>
+            </div>
+            <div class="search-results">
+                <div class="results-container" id="resultsContainer">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Buscando productos...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/javita/carrito.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get('q') || '';
+    document.getElementById('searchTerm').textContent = searchTerm || 'Todos los productos';
+
+    loadSearchResults(searchTerm);
+
+    async function loadSearchResults(term) {
+        const container = document.getElementById('resultsContainer');
+        container.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Buscando productos...</div>';
+        try {
+            let url = '/productos';
+            if(term) url += `?search=${encodeURIComponent(term)}`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if(!data.success || !data.productos || data.productos.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>No se encontraron resultados</h3>
+                        <p>Intenta con otros términos de búsqueda</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<div class="products-grid">';
+            data.productos.forEach(product => {
+                html += `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.imagen || '/estilos/imagenes/placeholder-producto.jpg'}" 
+                                 alt="${product.nombre}" loading="lazy">
+                            ${product.stock <= 0 ? '<span class="product-badge out-of-stock">Agotado</span>' : ''}
+                        </div>
+                        <div class="product-details">
+                            <h3>${product.nombre}</h3>
+                            <p class="product-supplier">${product.proveedor}</p>
+                            <div class="product-footer">
+                                <div class="price-container">
+                                    <span class="price">₲ ${product.precio.toLocaleString()}</span>
+                                    ${product.precio_original ? `<span class="original-price">₲ ${product.precio_original.toLocaleString()}</span>` : ''}
+                                </div>
+                                <button class="add-to-cart" data-id="${product.id_producto}" ${product.stock <= 0 ? 'disabled' : ''}>
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const productId = this.getAttribute('data-id');
+                    try {
+                        const response = await Carrito.agregarProducto(productId, 1);
+                        if(response.success) {
+                            showToast('Producto añadido al carrito', 'success');
+                            Carrito.actualizarContador();
+                        } else {
+                            showToast(response.message || 'Error al añadir al carrito', 'error');
+                        }
+                    } catch {
+                        showToast('Error de conexión', 'error');
+                    }
+                });
+            });
+        } catch (error) {
+            container.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Error al cargar los resultados</p>
+                </div>
+            `;
+        }
+    }
+
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast-notification ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => { toast.classList.add('show'); }, 100);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => { document.body.removeChild(toast); }, 300);
+        }, 3000);
+    }
+});
+</script>
+</body>
+</html>

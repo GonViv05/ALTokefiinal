@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALToke - Materiales de Construcción | Paraguay</title>
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+    <meta name="description" content="ALToke - Conectamos constructores con los mejores proveedores de materiales de construcción en Paraguay. Encuentra materiales básicos, acabados, herramientas y más.">
+    <meta name="keywords" content="materiales construcción, Paraguay, construcción, proveedores, herramientas, electricidad, fontanería">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/" class="active">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html">Proveedores</a></li>
+                    <li><a href="/contactos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content slide-up">
+                <h1>Materiales de construcción <span>de calidad</span></h1>
+                <p class="subtitle">Conectamos constructores con los mejores proveedores del Paraguay</p>
+                
+                <div class="hero-buttons">
+                    <a href="/productos.html" class="btn btn-primary btn-micro">Explorar Productos</a>
+                    <a href="/proveedores.html" class="btn btn-secondary btn-micro">Ser Proveedor</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proveedores Destacados -->
+    <section class="featured-suppliers">
+	<div class="container">
+		<div class="section-header">
+			<h2 class="section-title">Proveedores Destacados</h2>
+			<a href="/proveedores.html" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
+		</div>
+		
+		<div class="suppliers-grid">
+			<div class="supplier-card card-hover">
+				<div class="supplier-logo">
+					<img src="https://tse1.mm.bing.net/th/id/OIP.O-qF9GrWebDNG3xOWHkqUQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="ConstruMax" loading="lazy">
+				</div>
+				<h3>ConstruMax</h3>
+				<div class="supplier-rating">
+					<i class="fas fa-star"></i><i class="fas fa-star"></i>
+					<i class="fas fa-star"></i><i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+					<span>4.5</span>
+				</div>
+				<p class="supplier-specialty">Materiales Básicos</p>
+				<a href="/productos.html?proveedor=ConstruMax" class="btn btn-outline btn-micro">Ver catálogo</a>
+			</div>
+			
+			<div class="supplier-card card-hover">
+				<div class="supplier-logo">
+					<img src="https://www.bancobasa.com.py/storage/app/media/images/logos/hierropar.png" alt="Hierropar" loading="lazy">
+				</div>
+				<h3>Hierropar</h3>
+				<div class="supplier-rating">
+					<i class="fas fa-star"></i><i class="fas fa-star"></i>
+					<i class="fas fa-star"></i><i class="fas fa-star"></i>
+					<i class="far fa-star"></i>
+					<span>4.4</span>
+				</div>
+				<p class="supplier-specialty">Materiales Básicos</p>
+				<a href="/productos.html?proveedor=Hierropar" class="btn btn-outline btn-micro">Ver catálogo</a>
+			</div>
+			
+			<div class="supplier-card card-hover">
+				<div class="supplier-logo">
+					<img src="https://tse3.mm.bing.net/th/id/OIP.nty5RTs1tmC6Zs6hTYvriwHaBg?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Mercofer" loading="lazy">
+				</div>
+				<h3>Mercofer</h3>
+				<div class="supplier-rating">
+					<i class="fas fa-star"></i><i class="fas fa-star"></i>
+					<i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+					<i class="far fa-star"></i>
+					<span>4.2</span>
+				</div>
+				<p class="supplier-specialty">Acero</p>
+				<a href="/productos.html?proveedor=Mercofer" class="btn btn-outline btn-micro">Ver catálogo</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+    <!-- Product Categories -->
+    <section class="product-categories">
+	<div class="container">
+		<h2 class="section-title">Nuestras Categorías</h2>
+		<p class="section-subtitle">Encuentra todo lo que necesitas para tu proyecto</p>
+		
+		<div class="categories-grid">
+			<a href="/productos.html?categoria=materiales-basicos" class="category-card card-hover">
+				<div class="category-icon">
+					<i class="fas fa-cubes"></i>
+				</div>
+				<h3>Materiales Básicos</h3>
+				<p>Cemento, ladrillos, arena y más</p>
+			</a>
+			
+			<a href="/productos.html?categoria=acabados" class="category-card card-hover">
+				<div class="category-icon">
+					<i class="fas fa-paint-roller"></i>
+				</div>
+				<h3>Acabados</h3>
+				<p>Cerámicas, pinturas, sanitarios</p>
+			</a>
+			
+			<a href="/productos.html?categoria=herramientas" class="category-card card-hover">
+				<div class="category-icon">
+					<i class="fas fa-screwdriver-wrench"></i>
+				</div>
+				<h3>Herramientas</h3>
+				<p>Para profesionales y DIY</p>
+			</a>
+			
+			<a href="/productos.html?categoria=electricidad" class="category-card card-hover">
+				<div class="category-icon">
+					<i class="fas fa-bolt"></i>
+				</div>
+				<h3>Electricidad</h3>
+				<p>Cables, interruptores, iluminación</p>
+			</a>
+			
+			<a href="/productos.html?categoria=fontaneria" class="category-card card-hover">
+				<div class="category-icon">
+					<i class="fas fa-shower"></i>
+				</div>
+				<h3>Fontanería</h3>
+				<p>Tuberías, grifería, accesorios</p>
+			</a>
+			
+			<a href="/productos.html?categoria=otros" class="category-card card-hover">
+				<div class="category-icon">
+					<i class="fas fa-boxes-stacked"></i>
+				</div>
+				<h3>Otros Productos</h3>
+				<p>Todo para la construcción</p>
+			</a>
+		</div>
+	</div>
+</section>
+
+   
+    <!-- Estadísticas -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="240">0</div>
+                    <div class="stat-label">Proveedores</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="5482">0</div>
+                    <div class="stat-label">Productos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="851421">0</div>
+                    <div class="stat-label">Clientes satisfechos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Proveedores -->
+    <section class="cta-suppliers">
+        <div class="container">
+            <div class="cta-content slide-up">
+                <h2>¿Eres proveedor de materiales de construcción?</h2>
+                <p>Únete a nuestra plataforma y llega a más clientes en todo Paraguay</p>
+                <a href="/proveedores.html#registro" class="btn btn-light btn-micro">Registrar mi empresa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">ALToke</div>
+                    <p class="footer-about">Conectando constructores con los mejores proveedores de materiales en Paraguay.</p>
+                    <div class="footer-payment">
+                        <h4>Métodos de pago</h4>
+                        <div class="payment-methods">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-amex"></i>
+                            <i class="fas fa-money-bill-wave"></i>
+                            <i class="fas fa-university"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Enlaces rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/productos.html">Productos</a></li>
+                        <li><a href="/proveedores.html">Proveedores</a></li>
+                        <li><a href="/contactos.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Mi Cuenta</h4>
+                    <ul class="footer-links">
+                        <li><a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a></li>
+                        <li><a href="/login.html" data-auth="unauthenticated">Registrarse</a></li>
+                        <li><a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a></li>
+                        <li><a href="/carrito.html">Carrito</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Contacto</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Asunción, Paraguay</li>
+                        <li><i class="fas fa-envelope"></i> info@altoke.com.py</li>
+                        <li><i class="fas fa-phone-alt"></i> +595 21 123 456</li>
+                        <li><i class="fas fa-clock"></i> Lunes a Viernes: 7:00 - 17:00</li>
+                    </ul>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+            </div>
+        </div>
+    </footer>
+
+    <script src="/javita/main.js"></script>
+    <script src="/javita/auth.js"></script>
+    <script src="/javita/carrito.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar UI de autenticación
+            Auth.updateAuthUI();
+            
+            // Actualizar contador del carrito
+            Carrito.actualizarContador();
+            
+            // Animación de números en estadísticas
+            animateStats();
+            
+            // Manejar logout
+            document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                Auth.logout();
+            });
+            
+            // Animación para elementos
+            const animateElements = document.querySelectorAll('.slide-up');
+            animateElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            function animateStats() {
+                const statNumbers = document.querySelectorAll('.stat-number');
+                
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-count'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if(current >= target) {
+                            clearInterval(timer);
+                            current = target;
+                        }
+                        stat.textContent = Math.floor(current);
+                    }, 16);
+                });
+            }
+            
+            // Menú móvil
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mainNav = document.querySelector('.main-nav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('show');
+                this.innerHTML = mainNav.classList.contains('show') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Cerrar menú al hacer clic en un enlace (en móviles)
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if(window.innerWidth <= 768) {
+                        mainNav.classList.remove('show');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

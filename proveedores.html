@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <title>Proveedores | ALToke</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+</head>
+<body>
+      <header class="main-header">
+        <div class="container">
+            <div class="logo">
+               <a href="/"><img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke"></a> 
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html"  class="active">Proveedores</a></li>
+                    <li><a href="/contactos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="suppliers-page">
+        <!-- Hero Section -->
+        <section class="suppliers-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Nuestra Red de Proveedores</h1>
+                    <p class="subtitle">Conectamos con los mejores proveedores de materiales de construcción en Paraguay</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proveedores Registrados -->
+        <section class="registered-suppliers">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Proveedores Registrados</h2>
+                    <div class="search-filter">
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar proveedor...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        <select class="category-filter">
+                            <option value="">Todas las categorías</option>
+                            <option value="materiales-basicos">Materiales Básicos</option>
+                            <option value="acero">Acero</option>
+                            <option value="herramientas">Herramientas</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="suppliers-list">
+                    <!-- ConstruMax -->
+                    <div class="supplier-detail">
+                        <div class="supplier-main">
+                            <div class="supplier-logo">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.O-qF9GrWebDNG3xOWHkqUQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="ConstruMax">
+                            </div>
+                            <div class="supplier-info">
+                                <h3>ConstruMax</h3>
+                                <div class="supplier-meta">
+                                    <span class="supplier-category"><i class="fas fa-cubes"></i> Materiales Básicos</span>
+                                    <span class="supplier-location"><i class="fas fa-map-marker-alt"></i> Asunción</span>
+                                </div>
+                                <div class="supplier-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>4.5 (28 evaluaciones)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="supplier-actions">
+                            <a href="/productos.html?proveedor=ConstruMax" class="btn btn-outline"><i class="fas fa-boxes"></i> Ver Productos</a>
+                            <a href="https://construmax.mx" class="btn btn-primary"><i class="fas fa-envelope"></i> Contactar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Hierropar -->
+                    <div class="supplier-detail">
+                        <div class="supplier-main">
+                            <div class="supplier-logo">
+                                <img src="https://www.bancobasa.com.py/storage/app/media/images/logos/hierropar.png" alt="Hierropar">
+                            </div>
+                            <div class="supplier-info">
+                                <h3>Hierropar</h3>
+                                <div class="supplier-meta">
+                                    <span class="supplier-category"><i class="fas fa-cubes"></i> Materiales Básicos</span>
+                                    <span class="supplier-location"><i class="fas fa-map-marker-alt"></i> Asunción</span>
+                                </div>
+                                <div class="supplier-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span>4.4 (22 evaluaciones)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="supplier-actions">
+                            <a href="/productos.html?proveedor=Hierropar" class="btn btn-outline"><i class="fas fa-boxes"></i> Ver Productos</a>
+                            <a href="https://www.hierropar.com.py" class="btn btn-primary"><i class="fas fa-envelope"></i> Contactar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mercofer -->
+                    <div class="supplier-detail">
+                        <div class="supplier-main">
+                            <div class="supplier-logo">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.nty5RTs1tmC6Zs6hTYvriwHaBg?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Mercofer">
+                            </div>
+                            <div class="supplier-info">
+                                <h3>Mercofer</h3>
+                                <div class="supplier-meta">
+                                    <span class="supplier-category"><i class="fas fa-industry"></i> Acero</span>
+                                    <span class="supplier-location"><i class="fas fa-map-marker-alt"></i> Asunción</span>
+                                </div>
+                                <div class="supplier-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                        <i class="far fa-star"></i>
+                                        <span>4.2 (42 evaluaciones)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="supplier-actions">
+                            <a href="/productos.html?proveedor=Mercofer" class="btn btn-outline"><i class="fas fa-boxes"></i> Ver Productos</a>
+                            <a href="https://www.mercofer.com.py" class="btn btn-primary"><i class="fas fa-envelope"></i> Contactar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Registro -->
+        <section class="supplier-registration" id="registro">
+            <div class="container">
+                <div class="registration-container">
+                    <div class="registration-info">
+                        <h2>¿Quieres ser proveedor de ALToke?</h2>
+                        <p>Únete a nuestra plataforma y accede a miles de clientes potenciales en todo Paraguay.</p>
+                        
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <i class="fas fa-chart-line"></i>
+                                <div>
+                                    <h4>Mayor visibilidad</h4>
+                                    <p>Tu catálogo disponible para toda nuestra red de clientes</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-users"></i>
+                                <div>
+                                    <h4>Nuevos clientes</h4>
+                                    <p>Conecta con constructores y empresas de todo el país</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                                <div>
+                                    <h4>Gestión simplificada</h4>
+                                    <p>Herramientas para manejar tus cotizaciones y pedidos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="registration-form">
+                        <h3>Registro de Proveedor</h3>
+                        <form id="supplierForm">
+                            <div class="form-group">
+                                <label for="company">Nombre de la Empresa*</label>
+                                <input type="text" id="company" name="company" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ruc">RUC*</label>
+                                <input type="text" id="ruc" name="ruc" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact">Persona de Contacto*</label>
+                                <input type="text" id="contact" name="contact" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico*</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Teléfono*</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="categories">Categorías de Productos*</label>
+                                <select id="categories" name="categories" multiple required>
+                                    <option value="materiales-basicos">Materiales Básicos</option>
+                                    <option value="acabados">Acabados</option>
+                                    <option value="herramientas">Herramientas</option>
+                                    <option value="electricidad">Electricidad</option>
+                                    <option value="fontaneria">Fontanería</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                                <small>Mantén presionado Ctrl para seleccionar múltiples</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Describe tus productos/servicios*</label>
+                                <textarea id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">Acepto los <a href="#">términos y condiciones</a> y <a href="#">política de privacidad</a>*</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">ALToke</div>
+                    <p class="footer-about">Conectando constructores con los mejores proveedores de materiales en Paraguay.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Enlaces rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/productos.html">Productos</a></li>
+                        <li><a href="/proveedores.html">Proveedores</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Contacto</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Asunción, Paraguay</li>
+                        <li><i class="fas fa-envelope"></i> info@altoke.com.py</li>
+                        <li><i class="fas fa-phone-alt"></i> +595 21 123 456</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 ALToke. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/javita/main.js"></script>
+    <script src="/javita/auth.js"></script>
+    <script src="/javita/carrito.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Auth.updateAuthUI();
+        Carrito.actualizarContador();
+        document.getElementById('logoutBtn')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+    });
+    </script>
+</body>
+</html>

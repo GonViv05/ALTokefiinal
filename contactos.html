@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <title>Contacto | ALToke</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+</head>
+<body>
+       <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html">Proveedores</a></li>
+                    <li><a href="/contactos.html"  class="active">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="contact-section">
+        <div class="container">
+            <h1 class="section-title">Contáctenos</h1>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Información de contacto</h2>
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Asunción, Paraguay</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+595 21 123 456</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@altoke.com.py</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Lunes a Viernes: 7:00 - 17:00</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="social-media">
+                        <h3>Síganos</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Envíenos un mensaje</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Teléfono (opcional)</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Seleccione un asunto</option>
+                                <option value="cotizacion">Cotización</option>
+                                <option value="consulta">Consulta general</option>
+                                <option value="soporte">Soporte técnico</option>
+                                <option value="proveedor">Quiero ser proveedor</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Agrega scripts comunes para el header -->
+    <script src="/javita/main.js"></script>
+    <script src="/javita/auth.js"></script>
+    <script src="/javita/carrito.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Auth.updateAuthUI();
+        Carrito.actualizarContador();
+        document.getElementById('logoutBtn')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+    });
+    </script>
+</body>
+</html>

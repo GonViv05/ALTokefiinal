@@ -1,0 +1,289 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Admin",
+      "email": "admin@altoke.com",
+      "password": "admin123",
+      "telefono": "0991555123"
+    }
+  ],
+  "productos": [
+    {
+      "id_producto": 1,
+      "nombre": "Cemento Portland",
+      "descripcion": "Bolsa de cemento de 50 kg",
+      "precio": 45000,
+      "precio_original": 50000,
+      "imagen": "https://elhogarobrero.com.ar/wp-content/uploads/2023/03/118844_1.jpg",
+      "stock": 20,
+      "proveedor": "ConstruMax",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 2,
+      "nombre": "Ladrillo Hueco",
+      "descripcion": "Ladrillo hueco 12x18x33 cm",
+      "precio": 2500,
+      "precio_original": null,
+      "imagen": "https://torcuatomateriales.com.ar/wp-content/uploads/2020/06/24-3.jpg",
+      "stock": 100,
+      "proveedor": "ConstruMax",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 3,
+      "nombre": "Cemento Yguazú 50 kg",
+      "descripcion": "Bolsa de cemento marca Yguazú",
+      "precio": 75000,
+      "precio_original": null,
+      "imagen": "https://i.pinimg.com/736x/d0/c0/1c/d0c01c1470eeb9725bac72fe24d0be7b--portland.jpg",
+      "stock": 30,
+      "proveedor": "Ferremás",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 4,
+      "nombre": "Cemento Vallemi 50 kg",
+      "descripcion": "Bolsa de cemento marca Vallemi",
+      "precio": 70000,
+      "precio_original": null,
+      "imagen": "https://th.bing.com/th/id/R.d21992aa0787b6dd5a9ef9ef0c22e344?rik=pOIxFpCAjhsUPQ&pid=ImgRaw&r=0",
+      "stock": 25,
+      "proveedor": "Hierropar",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 5,
+      "nombre": "Ladrillo Hueco Cerámica 12x18x25 cm",
+      "descripcion": "Ladrillo hueco cerámico (12×18×25 cm)",
+      "precio": 2800,
+      "precio_original": null,
+      "imagen": "https://arcencohogar.vtexassets.com/arquivos/ids/280514-800-800?v=637651622257130000&width=800&height=800&aspect=true",
+      "stock": 200,
+      "proveedor": "Full Concretos S.A.",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 6,
+      "nombre": "Bloque Prefabricado de Cemento",
+      "descripcion": "Bloque de cemento prefabricado mediano",
+      "precio": 5000,
+      "precio_original": null,
+      "imagen": "https://tse1.mm.bing.net/th/id/OIP.WSJjHpp73BeWoMP5wEf2jAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 150,
+      "proveedor": "Full Concretos S.A.",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 7,
+      "nombre": "Varilla de Acero 6 mm x 6 m",
+      "descripcion": "Varilla lisa para armar estructuras",
+      "precio": 15000,
+      "precio_original": null,
+      "imagen": "https://tse3.mm.bing.net/th/id/OIP.MzRVnRRAJOUqpQauGJj4mwHaEo?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 500,
+      "proveedor": "Mercofer",
+      "categoria": "acero"
+    },
+    {
+      "id_producto": 8,
+      "nombre": "Perfil Galvanizado C",
+      "descripcion": "Perfil estructural galvanizado tipo C",
+      "precio": 45000,
+      "precio_original": null,
+      "imagen": "https://th.bing.com/th/id/OIP.vK-rVs37OYnVKInYQjCsfAHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 100,
+      "proveedor": "ACETOR",
+      "categoria": "acero"
+    },
+    {
+      "id_producto": 9,
+      "nombre": "Cemento Portland CP II C-32",
+      "descripcion": "Bolsa de cemento Portland compuesto (CP II C-32)",
+      "precio": 72000,
+      "precio_original": null,
+      "imagen": "https://inc.gov.py/wp-content/uploads/2024/07/img3.png",
+      "stock": 40,
+      "proveedor": "CECON (Cementos Concepción)",
+      "categoria": "materiales-basicos"
+    },
+    {
+      "id_producto": 10,
+      "nombre": "Arena Lavada (m³)",
+      "descripcion": "Metro cúbico de arena lavada para mezclas",
+      "precio": 200000,
+      "precio_original": null,
+      "imagen": "https://tse2.mm.bing.net/th/id/OIP.CwW6W-Th2Zyu0Gr4ktkPYQHaE5?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 50,
+      "proveedor": "Hierropar",
+      "categoria": "materiales-basicos"
+    }
+  ],
+  "carritos": [
+    {
+      "id_usuario": 1,
+      "items": [
+        {
+          "id_item": 1,
+          "id_producto": 2,
+          "cantidad": 3
+        }
+      ]
+    }
+  ],
+  "pedidos": [
+    {
+      "id": 1,
+      "id_usuario": 1,
+      "date": "2025-08-13T04:06:42",
+      "status": "pending",
+      "items": [
+        {
+          "id_producto": 2,
+          "nombre": "Ladrillo Hueco",
+          "imagen": "/estilos/imagenes/placeholder-producto.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 2500,
+          "cantidad": 5
+        }
+      ],
+      "shipping_cost": 0,
+      "discount": 0,
+      "subtotal": 12500,
+      "total": 12500
+    },
+    {
+      "id": 2,
+      "id_usuario": 1,
+      "date": "2025-08-13T04:35:09",
+      "status": "pending",
+      "items": [
+        {
+          "id_producto": 1,
+          "nombre": "Cemento Portland",
+          "imagen": "/estilos/imagenes/placeholder-producto.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 45000,
+          "cantidad": 4
+        }
+      ],
+      "shipping_cost": 0,
+      "discount": 0,
+      "subtotal": 180000,
+      "total": 180000
+    },
+    {
+      "id": 3,
+      "id_usuario": 1,
+      "date": "2025-08-13T07:19:01",
+      "status": "cancelled",
+      "items": [
+        {
+          "id_producto": 5,
+          "nombre": "Ladrillo Hueco Cerámica 12x18x25 cm",
+          "imagen": "https://arcencohogar.vtexassets.com/arquivos/ids/280514-800-800?v=637651622257130000&width=800&height=800&aspect=true",
+          "proveedor": "Full Concretos S.A.",
+          "precio": 2800,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 2,
+          "nombre": "Ladrillo Hueco",
+          "imagen": "https://torcuatomateriales.com.ar/wp-content/uploads/2020/06/24-3.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 2500,
+          "cantidad": 1
+        }
+      ],
+      "shipping_cost": 0,
+      "discount": 0,
+      "subtotal": 5300,
+      "total": 5300
+    },
+    {
+      "id": 4,
+      "id_usuario": 1,
+      "date": "2025-08-13T07:20:59",
+      "status": "pending",
+      "items": [
+        {
+          "id_producto": 1,
+          "nombre": "Cemento Portland",
+          "imagen": "https://elhogarobrero.com.ar/wp-content/uploads/2023/03/118844_1.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 45000,
+          "cantidad": 2
+        }
+      ],
+      "shipping_cost": 0,
+      "discount": 0,
+      "subtotal": 90000,
+      "total": 90000
+    },
+    {
+      "id": 5,
+      "id_usuario": 1,
+      "date": "2025-08-13T07:51:38",
+      "status": "pending",
+      "items": [
+        {
+          "id_producto": 1,
+          "nombre": "Cemento Portland",
+          "imagen": "https://elhogarobrero.com.ar/wp-content/uploads/2023/03/118844_1.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 45000,
+          "cantidad": 2
+        }
+      ],
+      "shipping_cost": 0,
+      "discount": 0,
+      "subtotal": 90000,
+      "total": 90000
+    },
+    {
+      "id": 6,
+      "id_usuario": 1,
+      "date": "2025-08-13T08:46:28",
+      "status": "pending",
+      "items": [
+        {
+          "id_producto": 1,
+          "nombre": "Cemento Portland",
+          "imagen": "https://elhogarobrero.com.ar/wp-content/uploads/2023/03/118844_1.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 45000,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 2,
+          "nombre": "Ladrillo Hueco",
+          "imagen": "https://torcuatomateriales.com.ar/wp-content/uploads/2020/06/24-3.jpg",
+          "proveedor": "ConstruMax",
+          "precio": 2500,
+          "cantidad": 7
+        },
+        {
+          "id_producto": 3,
+          "nombre": "Cemento Yguazú 50 kg",
+          "imagen": "https://i.pinimg.com/736x/d0/c0/1c/d0c01c1470eeb9725bac72fe24d0be7b--portland.jpg",
+          "proveedor": "Ferremás",
+          "precio": 75000,
+          "cantidad": 4
+        },
+        {
+          "id_producto": 6,
+          "nombre": "Bloque Prefabricado de Cemento",
+          "imagen": "https://tse1.mm.bing.net/th/id/OIP.WSJjHpp73BeWoMP5wEf2jAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+          "proveedor": "Full Concretos S.A.",
+          "precio": 5000,
+          "cantidad": 9
+        }
+      ],
+      "shipping_cost": 0,
+      "discount": 0,
+      "subtotal": 407500,
+      "total": 407500
+    }
+  ]
+}

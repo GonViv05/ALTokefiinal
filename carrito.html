@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <title>Carrito de Compras | ALToke</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+</head>
+<body>
+       <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html">Proveedores</a></li>
+                    <li><a href="/contactos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" class="activ" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <div class="container">
+            <h1 class="section-title">Carrito de Compras</h1>
+            
+            <div class="cart-container">
+                <div class="cart-items">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Cargando carrito...</div>
+                    <!-- Los items del carrito se cargarán aquí -->
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Resumen de Compra</h3>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span class="subtotal">₲ 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Envío</span>
+                            <span class="shipping">₲ 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Descuento</span>
+                            <span class="discount">-₲ 0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span class="total-amount">₲ 0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="coupon-form">
+                        <input type="text" placeholder="Código de descuento">
+                        <button class="btn btn-outline">Aplicar</button>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block checkout-btn">Proceder al Pago</button>
+                    <a href="/productos.html" class="continue-shopping">← Seguir comprando</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/javita/auth.js"></script>
+    <script src="/javita/carrito.js"></script>
+    <script src="/javita/main.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar autenticación
+    if(!Auth.isAuthenticated()) {
+        window.location.href = '/login.html?redirect=/carrito.html';
+        return;
+    }
+    
+    // Cargar carrito
+    loadCart();
+    
+    // Manejar logout
+    document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        Auth.logout();
+    });
+    
+    async function loadCart() {
+        try {
+            const cartData = await Carrito.obtenerCarrito();
+            renderCart(cartData);
+        } catch (error) {
+            console.error('Error al cargar carrito:', error);
+            document.querySelector('.cart-items').innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Error al cargar el carrito</p>
+                    <button class="btn btn-primary" id="retryCart">Reintentar</button>
+                </div>
+            `;
+            document.getElementById('retryCart').addEventListener('click', loadCart);
+        }
+    }
+    
+    function renderCart(cartData) {
+        const cartItems = document.querySelector('.cart-items');
+        
+        if(!cartData.items || cartData.items.length === 0) {
+            cartItems.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Tu carrito está vacío</h3>
+                    <p>Agrega productos para continuar</p>
+                    <a href="/productos.html" class="btn btn-primary">Ver Productos</a>
+                </div>
+            `;
+            document.querySelector('.checkout-btn').disabled = true;
+            return;
+        }
+        
+        let html = '';
+        let subtotal = 0;
+        
+        cartData.items.forEach(item => {
+            const itemTotal = item.precio * item.cantidad;
+            subtotal += itemTotal;
+            
+            html += `
+                <div class="cart-item" data-id="${item.id_item}">
+                    <div class="item-image">
+                        <img src="${item.imagen || '/estilos/imagenes/placeholder-producto.jpg'}" alt="${item.nombre}">
+                    </div>
+                    <div class="item-details">
+                        <h4>${item.nombre}</h4>
+                        <p class="item-supplier">Proveedor: ${item.proveedor}</p>
+                        <p class="item-price">₲ ${item.precio.toLocaleString()}</p>
+                        
+                        <div class="item-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-id="${item.id_item}">-</button>
+                                <input type="number" value="${item.cantidad}" min="1" class="quantity-input" data-id="${item.id_item}">
+                                <button class="quantity-btn plus" data-id="${item.id_item}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id_item}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item-total">
+                        ₲ ${itemTotal.toLocaleString()}
+                    </div>
+                </div>
+            `;
+        });
+        
+        cartItems.innerHTML = html;
+        
+        // Actualizar resumen
+        document.querySelector('.subtotal').textContent = `₲ ${subtotal.toLocaleString()}`;
+        document.querySelector('.total-amount').textContent = `₲ ${subtotal.toLocaleString()}`;
+        
+        // Agregar event listeners
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', async function() {
+                const itemId = this.getAttribute('data-id');
+                const input = this.parentElement.querySelector('.quantity-input');
+                let newQuantity = parseInt(input.value);
+                
+                if(this.classList.contains('minus') && newQuantity > 1) {
+                    newQuantity--;
+                } else if(this.classList.contains('plus')) {
+                    newQuantity++;
+                }
+                
+                input.value = newQuantity;
+                await updateCartItem(itemId, newQuantity);
+            });
+        });
+        
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('change', async function() {
+                const itemId = this.getAttribute('data-id');
+                let newQuantity = parseInt(this.value);
+                
+                if(isNaN(newQuantity) || newQuantity < 1) {
+                    newQuantity = 1;
+                    this.value = 1;
+                }
+                
+                await updateCartItem(itemId, newQuantity);
+            });
+        });
+        
+        document.querySelectorAll('.remove-item').forEach(btn => {
+            btn.addEventListener('click', async function() {
+                const itemId = this.getAttribute('data-id');
+                await removeCartItem(itemId);
+            });
+        });
+    }
+    
+    async function updateCartItem(itemId, newQuantity) {
+        try {
+            await Carrito.actualizarCantidad(itemId, newQuantity);
+            const cartData = await Carrito.obtenerCarrito();
+            renderCart(cartData);
+            Carrito.actualizarContador();
+        } catch (error) {
+            console.error('Error al actualizar carrito:', error);
+            showToast('Error al actualizar cantidad', 'error');
+        }
+    }
+    
+    async function removeCartItem(itemId) {
+        try {
+            await Carrito.eliminarItem(itemId);
+            const cartData = await Carrito.obtenerCarrito();
+            renderCart(cartData);
+            Carrito.actualizarContador();
+            showToast('Producto eliminado del carrito', 'success');
+        } catch (error) {
+            console.error('Error al eliminar del carrito:', error);
+            showToast('Error al eliminar producto', 'error');
+        }
+    }
+    
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast-notification ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 300);
+        }, 3000);
+    }
+    
+    // Manejar checkout
+    document.querySelector('.checkout-btn').addEventListener('click', async function() {
+        try {
+            const response = await Auth.fetchWithAuth('http://localhost:5003/pedidos', {
+                method: 'POST'
+            });
+            const data = await response.json();
+            if(!data.success) throw new Error(data.message || 'Error al crear pedido');
+            showToast('Pedido creado correctamente', 'success');
+            await Carrito.actualizarContador();
+            setTimeout(() => {
+                window.location.href = '/perfil.html'; // página de historial
+            }, 800);
+        } catch (err) {
+            showToast(err.message, 'error');
+        }
+    });
+    
+    Auth.updateAuthUI();
+    Carrito.actualizarContador();
+    document.getElementById('logoutBtn')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+});
+</script>
+</body>
+</html>

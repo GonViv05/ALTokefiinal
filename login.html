@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/estilos/imagenes/asdjlklaksd.png" type="image/png">
+    <title>Iniciar Sesión | ALToke</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/estilos/css/s-inicio.css">
+</head>
+<body>
+       <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/estilos/imagenes/loguito 2.0.png" alt="ALToke">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/productos.html">Productos</a></li>
+                    <li><a href="/proveedores.html">Proveedores</a></li>
+                    <li><a href="/contactos.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <form action="/productos.html" method="get">
+                        <input type="text" name="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/carrito.html" class="cart-icon" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                
+                <div class="user-menu">
+                    <button class="user-btn" aria-label="Menú de usuario">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/login.html" data-auth="unauthenticated">Iniciar Sesión</a>
+                        <a href="/login.html" data-auth="unauthenticated">Registrarse</a>
+                        <a href="/perfil.html" data-auth="authenticated">Mis Pedidos</a>
+                        <a href="#" id="logoutBtn" data-auth="authenticated">Cerrar Sesión</a>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" aria-label="Menú móvil"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+                    <button class="auth-tab" data-tab="register">Registrarse</button>
+                </div>
+                
+                <!-- Formulario de Login -->
+                <form id="loginForm" class="auth-form active" data-form="login">
+                    <div class="form-group">
+                        <label for="loginEmail">Correo Electrónico</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <div class="password-input">
+                            <input type="password" id="loginPassword" name="password" required>
+                            <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <label for="rememberMe">Recordarme</label>
+                        </div>
+                        <a href="/recuperar-contrasena.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                    
+                    <div class="social-login">
+                        <p>O inicia sesión con:</p>
+                        <div class="social-buttons">
+                            <button type="button" class="btn btn-outline social-btn google" disabled>
+                                <i class="fab fa-google"></i> Google (no disponible)
+                            </button>
+                            <button type="button" class="btn btn-outline social-btn facebook" disabled>
+                                <i class="fab fa-facebook-f"></i> Facebook (no disponible)
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Formulario de Registro -->
+                <form id="registerForm" class="auth-form" data-form="register">
+                    <div class="form-group">
+                        <label for="registerName">Nombre Completo</label>
+                        <input type="text" id="registerName" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Correo Electrónico</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPhone">Teléfono</label>
+                        <input type="tel" id="registerPhone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña</label>
+                        <div class="password-input">
+                            <input type="password" id="registerPassword" name="password" required>
+                            <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <small class="password-hint">Mínimo 8 caracteres, incluyendo números y letras</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                        <div class="password-input">
+                            <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                            <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                        <label for="acceptTerms">Acepto los <a href="/terminos.html">Términos y Condiciones</a> y <a href="/privacidad.html">Política de Privacidad</a></label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="/javita/main.js"></script>
+    <script src="/javita/auth.js"></script>
+    <script src="/javita/carrito.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Auth.updateAuthUI();
+        Carrito.actualizarContador();
+        document.getElementById('logoutBtn')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+        
+        // Manejar cambio entre pestañas
+        const tabs = document.querySelectorAll('.auth-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // Cambiar pestaña activa
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Mostrar formulario correspondiente
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                });
+                document.querySelector(`.auth-form[data-form="${tabName}"]`).classList.add('active');
+            });
+        });
+        
+        // Mostrar/ocultar contraseña
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+        });
+        
+        // Manejar login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = this.email.value;
+            const password = this.password.value;
+            
+            try {
+                const success = await Auth.login(email, password);
+                if(success) {
+                    window.location.href = '/carrito.html'; // Redirige al carrito después de login
+                }
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        });
+        
+        // Manejar registro
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if(this.password.value !== this.confirmPassword.value) {
+                showToast('Las contraseñas no coinciden', 'error');
+                return;
+            }
+            
+            if(this.password.value.length < 8) {
+                showToast('La contraseña debe tener al menos 8 caracteres', 'error');
+                return;
+            }
+            
+            const userData = {
+                name: this.name.value,
+                email: this.email.value,
+                phone: this.phone.value,
+                password: this.password.value
+            };
+            
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const data = await response.json();
+                
+                if(data.success) {
+                    showToast('Registro exitoso. Por favor inicia sesión.', 'success');
+                    document.querySelector('.auth-tab[data-tab="login"]').click();
+                } else {
+                    throw new Error(data.message || 'Error en el registro');
+                }
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        });
+        
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+    });
+    </script>
+</body>
+</html>
